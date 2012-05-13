@@ -1,0 +1,25 @@
+#version 400
+
+// TessControl
+
+layout(vertices = 3) out;
+in	vec3	v_position[];
+out vec3	tc_position[];
+
+uniform float TessLevelInner;
+uniform float TessLevelOuter;
+
+#define ID gl_InvocationID
+
+void main()
+{
+	tc_position[ID] = v_position[ID];
+	if (ID == 0)
+	{
+		gl_TessLevelInner[0] = TessLevelInner;
+		gl_TessLevelOuter[0] = TessLevelOuter;
+		gl_TessLevelOuter[1] = TessLevelOuter;
+		gl_TessLevelOuter[2] = TessLevelOuter;
+	}
+
+}
